@@ -390,7 +390,7 @@ class SodiumTests: XCTestCase {
 
 
     extension SodiumTests {
-        static var allTests : [(String, SodiumTests -> () throws -> Void)] {
+        static var allTests : [(String, (SodiumTests) -> () throws -> Void)] {
             return [
                 ("testBox", testBox),
                 ("testSecretBox", testSecretBox),
