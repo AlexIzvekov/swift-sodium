@@ -169,15 +169,32 @@ public class Utils {
         let binDataCapacity = b64DataLen * 3 / 4
         var binData = Data(count: binDataCapacity)
         var binDataLen: size_t = 0
-        let ignore_cstr = ignore != nil ? (ignore! as NSString).utf8String : nil
+        //let ignore_cstr = ignore != nil ? (ignore! as NSString).utf8String : nil
 
-        let result = binData.withUnsafeMutableBytes { binPtr in
-            b64Data.withUnsafeBytes { b64Ptr in
-                sodium_base642bin(binPtr, binDataCapacity,
-                                  b64Ptr, b64DataLen,
-                                  ignore_cstr, &binDataLen, nil, variant.rawValue)
+        var result:Int32 = 0
+
+        if let ignore = ignore{
+            result = binData.withUnsafeMutableBytes { binPtr in
+                b64Data.withUnsafeBytes { b64Ptr in
+                    ignore.withCString({ ignore_cstr in
+                        sodium_base642bin(binPtr, binDataCapacity,
+                                          b64Ptr, b64DataLen,
+                                          ignore_cstr, &binDataLen, nil, variant.rawValue)
+                    })
+                }
+            }
+        }else{
+            result = binData.withUnsafeMutableBytes { binPtr in
+                b64Data.withUnsafeBytes { b64Ptr in
+                    sodium_base642bin(binPtr, binDataCapacity,
+                                      b64Ptr, b64DataLen,
+                                      nil, &binDataLen, nil, variant.rawValue)
+
+                }
             }
         }
+
+
         if  result != 0 {
             return nil
         }
