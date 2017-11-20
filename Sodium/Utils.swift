@@ -91,15 +91,32 @@ public class Utils {
         let binDataCapacity = hexDataLen / 2
         var binData = Data(count: binDataCapacity)
         var binDataLen: size_t = 0
-        let ignore_cstr = ignore != nil ? (ignore! as NSString).utf8String : nil
+//        let ignore_cstr = ignore != nil ? (ignore! as NSString).utf8String : nil
 
-        let result = binData.withUnsafeMutableBytes { binPtr in
-            hexData.withUnsafeBytes { hexPtr in
-                sodium_hex2bin(binPtr, binDataCapacity,
-                               hexPtr, hexDataLen,
-                               ignore_cstr, &binDataLen, nil)
+        var result:Int32 = 0
+
+        if let ignore = ignore{
+            result = binData.withUnsafeMutableBytes { binPtr in
+                hexData.withUnsafeBytes { hexPtr in
+                    ignore.withCString({ ignore_cstr in
+                        sodium_hex2bin(binPtr, binDataCapacity,
+                                       hexPtr, hexDataLen,
+                                       ignore_cstr, &binDataLen, nil)
+                    })
+                }
+            }
+        }else{
+            result = binData.withUnsafeMutableBytes { binPtr in
+                hexData.withUnsafeBytes { hexPtr in
+                    sodium_hex2bin(binPtr, binDataCapacity,
+                                    hexPtr, hexDataLen,
+                                    nil, &binDataLen, nil)
+
+                }
             }
         }
+
+
         if result != 0 {
             return nil
         }
