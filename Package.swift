@@ -19,5 +19,8 @@ let package = Package(
             path: ".",
             exclude: ["Sodium/libsodium"],
             sources: ["Sodium"]),
+        .testTarget(
+            name: "SodiumTests",
+            dependencies: ["Sodium"]),
     ]
 )

@@ -125,6 +125,8 @@ class SodiumTests: XCTestCase {
         XCTAssertEqual(h6, h3)
     }
 
+
+
     func testRandomBytes() {
         let randomLen = 100 + Int(sodium.randomBytes.uniform(upperBound: 100))
         let random1 = sodium.randomBytes.buf(length: randomLen)!
@@ -156,6 +158,7 @@ class SodiumTests: XCTestCase {
         XCTAssertEqual(randomd, "444dc0602207c270b93f")
     }
 
+
     func testShortHash() {
         let message = "My Test Message".toData()!
         let key = sodium.utils.hex2bin("00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff", ignore: " ")!
@@ -163,6 +166,7 @@ class SodiumTests: XCTestCase {
         XCTAssertEqual(h, "bb9be85c918015ea")
     }
 
+    
     func testSignature() {
         let message = "My Test Message".toData()!
         let keyPair = sodium.sign.keyPair(seed: sodium.utils.hex2bin("00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff 00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff", ignore: " ")!)!
@@ -178,6 +182,7 @@ class SodiumTests: XCTestCase {
         let unsignedMessage = sodium.sign.open(signedMessage: signedMessage, publicKey: keyPair.publicKey)!
         XCTAssertEqual(unsignedMessage, message)
     }
+
 
     func testUtils() {
         var dataToZero = Data(bytes: [1, 2, 3, 4] as [UInt8])
@@ -356,3 +361,59 @@ class SodiumTests: XCTestCase {
         XCTAssertTrue(data.count == 4)
     }
 }
+
+
+#if os(Linux)
+/*
+ testBox
+ testSecretBox
+ testGenericHash
+ testRandomBytes
+ testShortHash
+ testSignature
+ testUtils
+ testPwHash
+ testKeyExchange
+ testStream
+ testAuth
+ testKeyDerivationInputKeyTooShort
+ testKeyDerivationInputKeyTooLong
+ testKeyDerivationSubKeyTooShort
+ testKeyDerivationSubKeyTooLong
+ testKeyDerivationContextTooLong
+ testKeyDerivation
+ testKeyDerivationRegression
+ testSecretStream
+ testBase64
+ testPad
+ */
+
+
+    extension SodiumTests {
+        static var allTests : [(String, TodoTests -> () throws -> Void)] {
+            return [
+                ("testBox", testBox),
+                ("testSecretBox", testSecretBox),
+                ("testGenericHash", testGenericHash),
+                ("testRandomBytes", testRandomBytes),
+                ("testShortHash", testShortHash),
+                ("testSignature", testSignature),
+                ("testUtils", testUtils),
+                ("testPwHash", testPwHash),
+                ("testKeyExchange", testKeyExchange),
+                ("testStream", testStream),
+                ("testAuth", testAuth),
+                ("testKeyDerivationInputKeyTooShort", testKeyDerivationInputKeyTooShort),
+                ("testKeyDerivationInputKeyTooLong", testKeyDerivationInputKeyTooLong),
+                ("testKeyDerivationSubKeyTooShort", testKeyDerivationSubKeyTooShort),
+                ("testKeyDerivationSubKeyTooLong", testKeyDerivationSubKeyTooLong),
+                ("testKeyDerivationContextTooLong", testKeyDerivationContextTooLong),
+                ("testKeyDerivation", testKeyDerivation),
+                ("testKeyDerivationRegression", testKeyDerivationRegression),
+                ("testSecretStream", testSecretStream),
+                ("testBase64", testBase64),
+                ("testPad", testPad)
+            ]
+        }
+    }
+#endif

@@ -168,6 +168,7 @@
 		D2A274051F13AD9300958702 /* KeyDerivation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyDerivation.swift; sourceTree = "<group>"; };
 		D85101031E22EF5B003DB2E8 /* ReadmeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadmeTests.swift; sourceTree = "<group>"; };
 		D85101051E22F77E003DB2E8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		FA3A94D51FC318DF00B79591 /* LinuxMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinuxMain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,7 +222,7 @@
 				46C9EF481FBB8A7800BD047D /* Package.swift */,
 				901644AF1AE36D6000163E3E /* Examples */,
 				09A943C91A4EB5F500C8A04F /* Sodium */,
-				09A943D61A4EB5F500C8A04F /* SodiumTests */,
+				FA3A94D41FC318CB00B79591 /* Tests */,
 				09A943C81A4EB5F500C8A04F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -415,6 +416,15 @@
 				901645021AE376C100163E3E /* Helpers.swift */,
 			);
 			name = CommonCode;
+			sourceTree = "<group>";
+		};
+		FA3A94D41FC318CB00B79591 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				FA3A94D51FC318DF00B79591 /* LinuxMain.swift */,
+				09A943D61A4EB5F500C8A04F /* SodiumTests */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -918,7 +928,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = SodiumTests/Info.plist;
+				INFOPLIST_FILE = Tests/SodiumTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.pureftpd.swiftsodium.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SodiumTests;
@@ -935,7 +945,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = SodiumTests/Info.plist;
+				INFOPLIST_FILE = Tests/SodiumTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.pureftpd.swiftsodium.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SodiumTests;
