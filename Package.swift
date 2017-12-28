@@ -17,7 +17,6 @@ let package = Package(
             name: "Sodium",
             dependencies: [],
             path: ".",
-            exclude: ["Sodium/libsodium"],
             sources: ["Sodium"]),        
     ]
 )
