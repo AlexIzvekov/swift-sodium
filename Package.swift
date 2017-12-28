@@ -10,7 +10,7 @@ let package = Package(
             targets: ["Sodium"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/AlexIzvekov/Clibsodium.git", from: "1.0.0"),
+        .package(url: "https://github.com/AlexIzvekov/Clibsodium.git", from: "1.0.1"),
     ],
     targets: [
         .target(
